@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="iWIN 115 年度兒少使用網際網路行為觀察問卷：石門國小學校回饋結果與全國整體結果。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+<title>iWIN 115 年度問卷回饋</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+/* 版面：一封攤開的信 → 兩張並排的結果卡（本校 vs 全國）→ 建議閱讀順序 → 原信全文 */
+:root {
+  --bg: #eef3f4;
+  --paper: #fbfdfd;
+  --ink: #1d2b33;
+  --muted: #56666f;
+  --line: #d3dee1;
+  --school: #0f6e74;
+  --school-soft: #dcefef;
+  --nation: #b4532a;
+  --nation-soft: #f6e4da;
+  --done: #2f7d46;
+  --display: "LXGW WenKai TC", "Kaiti TC", "DFKai-SB", serif;
+  --body: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", system-ui, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111a1e; --paper: #18242a; --ink: #e4ecee; --muted: #9db0b7; --line: #2c3c43;
+    --school: #5fc3c6; --school-soft: #17363a; --nation: #ec9a72; --nation-soft: #3a2519; --done: #7fd096;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111a1e; --paper: #18242a; --ink: #e4ecee; --muted: #9db0b7; --line: #2c3c43;
+  --school: #5fc3c6; --school-soft: #17363a; --nation: #ec9a72; --nation-soft: #3a2519; --done: #7fd096;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.75; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 24px; display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.3; }
+p { margin: 0; }
+.eyebrow { font-size: 13px; letter-spacing: .12em; color: var(--muted); font-weight: 500; }
+
+/* 信封抬頭 */
+.letter { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 32px clamp(20px, 5vw, 48px); position: relative; overflow: hidden; display: grid; gap: 18px; }
+.letter::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 6px;
+  background: repeating-linear-gradient(135deg, var(--school) 0 18px, transparent 18px 28px, var(--nation) 28px 46px, transparent 46px 56px); opacity: .85; }
+.letter h1 { font-size: clamp(28px, 5vw, 40px); }
+.letter .to { font-family: var(--display); font-size: 20px; }
+.letter .lede { max-width: 62ch; color: var(--ink); }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: 13px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+
+/* 進度列 */
+.progress { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.bar { flex: 1 1 200px; height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.bar span { display: block; height: 100%; width: 0; background: var(--done); transition: width .4s ease; }
+.progress-text { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* 兩份報告 */
+.section-head { display: grid; gap: 6px; margin-bottom: 18px; }
+.section-head h2 { font-size: 26px; }
+.reports { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.report { background: var(--paper); border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 6px; padding: 24px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.report.school { --c: var(--school); --soft: var(--school-soft); }
+.report.nation { --c: var(--nation); --soft: var(--nation-soft); }
+.report .scope { justify-self: start; background: var(--soft); color: var(--c); font-weight: 700; font-size: 13px; padding: 2px 10px; border-radius: 4px; letter-spacing: .06em; }
+.report h3 { font-size: 22px; }
+.report p { color: var(--muted); }
+.url { font-family: var(--mono); font-size: 13px; background: var(--bg); border: 1px dashed var(--line); padding: 6px 10px; border-radius: 4px; overflow-wrap: anywhere; user-select: all; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { font: inherit; font-size: 15px; font-weight: 500; border-radius: 5px; padding: 8px 16px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--c); }
+.btn.primary { background: var(--c); color: var(--paper); }
+.btn.ghost { background: transparent; color: var(--c); }
+.btn:hover { filter: brightness(1.08); }
+.btn:focus-visible, summary:focus-visible, .check input:focus-visible + span { outline: 3px solid var(--c, var(--school)); outline-offset: 2px; }
+.check { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); cursor: pointer; padding-top: 4px; border-top: 1px solid var(--line); }
+.check input { width: 18px; height: 18px; accent-color: var(--done); }
+.report.is-done .check { color: var(--done); font-weight: 500; }
+.toast { font-size: 13px; color: var(--done); min-height: 1.4em; }
+
+/* 建議閱讀順序 */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; counter-reset: s; }
+.steps li { counter-increment: s; padding: 18px 18px 18px 0; border-top: 2px solid var(--ink); display: grid; gap: 6px; }
+.steps li::before { content: "第 " counter(s) " 步"; font-family: var(--display); font-size: 15px; color: var(--muted); }
+.steps strong { font-family: var(--display); font-size: 19px; font-weight: 700; }
+.steps p { color: var(--muted); font-size: 15px; }
+.note { font-size: 14px; color: var(--muted); margin-top: 14px; }
+
+/* 原信 */
+details { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; }
+summary { cursor: pointer; padding: 16px 22px; font-family: var(--display); font-size: 19px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "展開"; font-family: var(--body); font-size: 14px; color: var(--muted); }
+details[open] summary::after { content: "收合"; }
+.original { padding: 0 22px 24px; display: grid; gap: 14px; max-width: 70ch; font-size: 15px; }
+.original ol { margin: 0; padding-left: 1.4em; display: grid; gap: 10px; }
+.original .sign { font-family: var(--display); font-size: 17px; }
+
+.site-credit { text-align: center; padding-block: 8px 24px; font-size: 13px; color: var(--muted); }
+.site-credit__heart { display: inline-block; margin: 0 2px; }
+.site-credit__author { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
+.site-credit__author:hover { color: var(--school); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <header class="letter">
+    <p class="eyebrow">iWIN 網路內容防護機構 · 調查結果回饋</p>
+    <h1>115 年度「iWIN 兒少使用網際網路行為觀察」問卷調查結果</h1>
+    <p class="to">桃園市立石門國民小學 老師您好：</p>
+    <p class="lede">感謝老師協助參與本年度問卷調查，並協助學生完成問卷填答。本次調查資料已完成整理與分析，下方提供兩份資料供老師參考：一份是本校學生的回饋結果，一份是全國整體結果，兩者可以對照閱讀。</p>
+    <div class="meta">
+      <span class="chip">115 年度調查</span>
+      <span class="chip">對象：兒童及少年</span>
+      <span class="chip">共 2 份結果檔案</span>
+    </div>
+    <div class="progress" aria-live="polite">
+      <div class="bar" aria-hidden="true"><span id="barFill"></span></div>
+      <span class="progress-text" id="progressText">已查看 0 / 2 份</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="reportsTitle">
+    <div class="section-head">
+      <p class="eyebrow">兩份調查結果</p>
+      <h2 id="reportsTitle">先看本校，再對照全國</h2>
+    </div>
+    <div class="reports">
+      <article class="report school" data-id="school">
+        <span class="scope">本校</span>
+        <h3>學校問卷回饋結果</h3>
+        <p>呈現本校學生本次問卷的填答情形與相關調查結果，幫助學校了解學生網路使用行為與相關議題的概況。</p>
+        <div class="url" id="urlSchool">http://gofile.me/7Ayy1/1TuxD5FK0</div>
+        <div class="actions">
+          <a class="btn primary" href="http://gofile.me/7Ayy1/1TuxD5FK0" target="_blank" rel="noopener noreferrer" data-open="school">開啟本校結果 ↗</a>
+          <button class="btn ghost" type="button" data-copy="urlSchool">複製連結</button>
+        </div>
+        <p class="toast" id="toastSchool"></p>
+        <label class="check"><input type="checkbox" id="doneSchool" data-done="school"><span>我已看過這份</span></label>
+      </article>
+
+      <article class="report nation" data-id="nation">
+        <span class="scope">全國</span>
+        <h3>全國整體問卷調查結果</h3>
+        <p>彙整本次參與調查各校的問卷資料，呈現全國兒少網路使用行為與相關議題的整體趨勢，可作為學校比較與參考。</p>
+        <div class="url" id="urlNation">http://gofile.me/7Ayy1/1k6RctNAf</div>
+        <div class="actions">
+          <a class="btn primary" href="http://gofile.me/7Ayy1/1k6RctNAf" target="_blank" rel="noopener noreferrer" data-open="nation">開啟全國結果 ↗</a>
+          <button class="btn ghost" type="button" data-copy="urlNation">複製連結</button>
+        </div>
+        <p class="toast" id="toastNation"></p>
+        <label class="check"><input type="checkbox" id="doneNation" data-done="nation"><span>我已看過這份</span></label>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="stepsTitle">
+    <div class="section-head">
+      <p class="eyebrow">建議的閱讀方式</p>
+      <h2 id="stepsTitle">怎麼把兩份資料用起來</h2>
+    </div>
+    <ol class="steps">
+      <li><strong>看本校概況</strong><p>先打開學校問卷回饋結果，掌握本校學生的網路使用情形。</p></li>
+      <li><strong>對照全國趨勢</strong><p>再看全國整體結果，比較本校與全國在各議題上的異同。</p></li>
+      <li><strong>挑出值得關注的議題</strong><p>把本校與全國差異較明顯的項目記下來，作為班級宣導或資訊素養課程的參考。</p></li>
+    </ol>
+    <p class="note">以上是整理信件內容後的建議順序，報告實際內容請以 iWIN 提供的檔案為準。連結為外部檔案分享網站，會在新分頁開啟。</p>
+  </section>
+
+  <details id="letterBox">
+    <summary>原始信件全文</summary>
+    <div class="original">
+      <p>桃園市立石門國民小學老師您好：</p>
+      <p>感謝老師協助參與115年度「iWIN兒少使用網際網路行為觀察」問卷調查，並協助學生完成問卷填答。</p>
+      <p>目前本次調查資料已完成整理與分析，隨信提供以下兩份資料，供老師參考：</p>
+      <ol>
+        <li>學校問卷回饋結果：呈現貴校學生本次問卷填答情形及相關調查結果，提供學校了解學生網路使用行為與相關議題的概況。<br>連結：http://gofile.me/7Ayy1/1TuxD5FK0</li>
+        <li>全國整體問卷調查結果：彙整本次參與調查之各校問卷資料，呈現全國兒少網路使用行為及相關議題的整體趨勢，亦可作為學校進行比較與參考的資料。<br>連結：http://gofile.me/7Ayy1/1k6RctNAf</li>
+      </ol>
+      <p>再次感謝老師於問卷施測期間的協助與配合，因為有各校師長的支持與協助，才能順利完成本次調查。</p>
+      <p class="sign">敬祝 順心</p>
+    </div>
+  </details>
+
+  <footer class="site-credit">
+    Made with <span class="site-credit__heart" aria-label="愛心">❤️</span> by
+    <a href="https://www.smes.tyc.edu.tw/modules/school/index.php?department_id=2&zone_id=0&page_id=2&content_id=11&type=news&from_op=all_news#a5" target="_blank" rel="noopener noreferrer" class="site-credit__author">阿凱老師</a>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var KEY = "iwin115-done";
+  var state = { school: false, nation: false };
+  try { var saved = JSON.parse(localStorage.getItem(KEY) || "{}"); state.school = !!saved.school; state.nation = !!saved.nation; } catch (e) {}
+
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+  function render() {
+    var n = 0;
+    ["school", "nation"].forEach(function (id) {
+      var box = document.querySelector('[data-done="' + id + '"]');
+      box.checked = state[id];
+      document.querySelector('.report[data-id="' + id + '"]').classList.toggle("is-done", state[id]);
+      if (state[id]) n++;
+    });
+    document.getElementById("barFill").style.width = (n / 2 * 100) + "%";
+    document.getElementById("progressText").textContent = n === 2 ? "兩份都看過了，可以開始對照" : "已查看 " + n + " / 2 份";
+  }
+
+  document.querySelectorAll("[data-done]").forEach(function (box) {
+    box.addEventListener("change", function () { state[box.dataset.done] = box.checked; save(); render(); });
+  });
+  document.querySelectorAll("[data-open]").forEach(function (a) {
+    a.addEventListener("click", function () { state[a.dataset.open] = true; save(); render(); });
+  });
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var el = document.getElementById(btn.dataset.copy);
+      var toast = document.getElementById(btn.dataset.copy === "urlSchool" ? "toastSchool" : "toastNation");
+      var text = el.textContent.trim();
+      function selectFallback() {
+        var r = document.createRange(); r.selectNodeContents(el);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        toast.textContent = "已選取連結，請按 Ctrl+C 複製";
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { toast.textContent = "已複製連結"; }, selectFallback);
+      } else { selectFallback(); }
+      setTimeout(function () { toast.textContent = ""; }, 3000);
+    });
+  });
+  render();
+})();
+</script>
+
+</body>
+</html>
